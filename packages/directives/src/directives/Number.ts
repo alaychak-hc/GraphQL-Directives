@@ -9,7 +9,7 @@
     Email: ALaychak@harriscomputer.com
 
     Created At: 01-24-2022 03:09:59 PM
-    Last Modified: 01-24-2022 03:10:05 PM
+    Last Modified: 01-26-2022 09:11:46 AM
     Last Updated By: Andrew Laychak
 
     Description: Directive that handles unit conversions
@@ -98,7 +98,7 @@ const NumberDirective = (schema: GraphQLSchema) =>
           nResult = '';
         }
 
-        console.log('RESULT: ', result);
+        // console.log('RESULT: ', result);
 
         numeral.reset();
         const rValue: Numeral = numeral(nResult);
