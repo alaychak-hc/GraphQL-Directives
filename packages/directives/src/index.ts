@@ -5,7 +5,7 @@
     Email: ALaychak@harriscomputer.com
 
     Created At: 01-24-2022 03:11:36 PM
-    Last Modified: 01-28-2022 09:28:37 AM
+    Last Modified: 01-28-2022 09:45:57 AM
     Last Updated By: Andrew Laychak
 
     Description: Index file for the directives package
@@ -17,8 +17,7 @@
 // #endregion
 
 // #region Imports
-import DateDirective from '@directives/Date';
-import NumberDirective from '@directives/Number';
+import { DateDirective, NumberDirective } from './directives/All';
 // #endregion
 
 // #region Exports
