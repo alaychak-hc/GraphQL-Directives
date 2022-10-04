@@ -1,22 +1,58 @@
+// #region Developer Information
+/*
+ ********************************************
+  Author: Andrew Laychak
+  Email: ALaychak@harriscomputer.com
+  
+  Created At: 09-28-2022 09:55:20 AM
+  Last Modified: 09-30-2022 03:52:29 PM
+  Last Updated By: Andrew Laychak
+  
+  Description: 
+  
+  References:
+      - https://www.typescriptlang.org/tsconfig
+      - https://www.typescriptlang.org/docs/handbook/compiler-options.html
+ ********************************************
+*/
+// #endregion
+
 {
   "compilerOptions": {
-    "allowJs": false,
-    "allowSyntheticDefaultImports": true,
-    "baseUrl": "./",
-    "emitDecoratorMetadata": true,
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "forceConsistentCasingInFileNames": true,
+    "target": "ESNext",
+    "module": "ESNext",
     "lib": ["esnext", "esnext.asynciterable"],
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "outDir": "./dist",
+    "sourceMap": false,
+    "inlineSourceMap": false,
+    "declaration": false,
+    // "declarationDir": "./types",
+    "typeRoots": ["./typings", "./node_modules/@types"],
+    "declarationMap": false,
     "removeComments": true,
-    "resolveJsonModule": true,
+    "outDir": "./dist",
     "rootDir": "./",
-    "skipLibCheck": true,
-    "sourceMap": true,
     "strict": true,
-    "target": "es6"
+    "allowJs": false,
+    "checkJs": false,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "baseUrl": "./",
+    "paths": {
+      "@directives/*": ["./packages/directives/src/*"]
+    },
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "plugins": [{ "transform": "typescript-transform-paths" }]
   }
+  // "include": [],
+  // "exclude": []
 }

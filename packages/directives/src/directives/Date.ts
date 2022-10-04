@@ -8,8 +8,8 @@
     Author: Andrew Laychak
     Email: ALaychak@harriscomputer.com
 
-    Created At: 01-24-2022 03:10:28 PM
-    Last Modified: 01-24-2022 03:10:33 PM
+    Created At: 01-06-2022 02:34:02 PM
+    Last Modified: 09-30-2022 12:15:48 PM
     Last Updated By: Andrew Laychak
 
     Description: Directive that handles the conversion of dates to specific formats.
@@ -21,15 +21,10 @@
 // #endregion
 
 // #region Imports
-import { mapSchema, MapperKind } from '@graphql-tools/utils';
 import { format, parse, parseISO } from 'date-fns';
-import {
-  defaultFieldResolver,
-  DirectiveNode,
-  GraphQLSchema,
-  GraphQLString,
-} from 'graphql';
-import getDirective from './Get Directive';
+import type { GraphQLSchema } from 'graphql';
+import { GraphQLString } from 'graphql';
+import generateNewDirective from './Generate Directive.js';
 // #endregion
 
 // #region Date Directive
@@ -40,58 +35,41 @@ import getDirective from './Get Directive';
  * @see {@link https://www.apollographql.com/docs/apollo-server/schema/creating-directives/}
  */
 const DateDirective = (schema: GraphQLSchema) =>
-  mapSchema(schema, {
-    [MapperKind.OBJECT_FIELD]: (fieldConfig) => {
-      if (!fieldConfig.astNode) {
-        return fieldConfig;
-      }
+  generateNewDirective(schema, {
+    name: 'date',
+    args: [
+      {
+        dateFormat: {
+          description: 'Transform the field to the specified type',
+          type: GraphQLString,
+        },
+      },
+      {
+        inFormat: {
+          description: 'The date format the field is in',
+          type: GraphQLString,
+        },
+      },
+    ],
+    resolveFn(result, otherArgs) {
+      const { dateFormat, inFormat } = otherArgs;
 
-      const { directives } = fieldConfig.astNode;
+      let rValue: string = result;
+      if (dateFormat) {
+        if (typeof result === 'string') {
+          let tempResult = parseISO(result);
 
-      if (!directives) {
-        return fieldConfig;
-      }
-
-      const directive = getDirective(directives as DirectiveNode[], 'date');
-
-      if (!directive) return fieldConfig;
-      const { resolve = defaultFieldResolver } = fieldConfig;
-
-      const uField = fieldConfig;
-
-      if (!uField.args) {
-        uField.args = {};
-      }
-
-      uField.args.dateFormat = {
-        description: 'Transform the field to the specified type',
-        type: GraphQLString,
-      };
-
-      uField.args.inFormat = {
-        description: 'The date format the field is in',
-        type: GraphQLString,
-      };
-
-      uField.resolve = async (source, { ...otherArgs }, context, info) => {
-        const { dateFormat, inFormat }: { [key: string]: string } = otherArgs;
-        let result = await resolve(source, otherArgs, context, info);
-        let rValue: string = result;
-
-        if (result && dateFormat) {
-          if (typeof result === 'string') {
-            result = parseISO(result);
-
-            if (inFormat) {
-              result = parse(result as string, inFormat, new Date());
-            }
+          if (inFormat) {
+            tempResult = parse(result, inFormat, new Date());
           }
+
+          rValue = format(tempResult, dateFormat);
+        } else {
           rValue = format(result as Date, dateFormat);
         }
+      }
 
-        return rValue;
-      };
-      return fieldConfig;
+      return rValue;
     },
   });
 // #endregion

@@ -3,7 +3,8 @@
   "description": "The workspace for the GraphQL-Directives project",
   "private": true,
   "scripts": {
-    "publish:directives": "pnpm publish --filter @alaychak-hc/graphql-directives",
+    "publish:directives:local": "pnpm --filter @alaychak-hc/graphql-directives publish --dry-run --force --no-git-checks",
+    "publish:directives": "pnpm --filter @alaychak-hc/graphql-directives publish --force --no-git-checks",
     "build:directives": "pnpm build --filter @alaychak-hc/graphql-directives --filter=!./packages/directives/dist",
     "lint:staged": "pnpm run lint:staged -r --filter=!./packages/directives/dist",
     "contributors:add": "all-contributors add",
