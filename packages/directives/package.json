@@ -1,6 +1,6 @@
 {
   "name": "@alaychak-hc/graphql-directives",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "alaychak-hc",
   "description": "GraphQL directives for Apollo Server v3",
   "homepage": "https://github.com/alaychak-hc/GraphQL-Directives#readme",

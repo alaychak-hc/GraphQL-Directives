@@ -9,7 +9,7 @@
   Email: ALaychak@harriscomputer.com
   
   Created At: 09-30-2022 09:36:32 AM
-  Last Modified: 09-30-2022 02:24:52 PM
+  Last Modified: 10-04-2022 04:01:47 PM
   Last Updated By: Andrew Laychak
   
   Description: Generates a new directive, using the supplied arguments.
@@ -117,4 +117,5 @@ function generateNewDirective(
 
 // #region Exports
 export default generateNewDirective;
+export type { NewDirectiveArgs };
 // #endregion
