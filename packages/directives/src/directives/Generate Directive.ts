@@ -9,7 +9,7 @@
   Email: ALaychak@harriscomputer.com
   
   Created At: 09-30-2022 09:36:32 AM
-  Last Modified: 10-04-2022 04:01:47 PM
+  Last Modified: 10-21-2022 10:01:54 AM
   Last Updated By: Andrew Laychak
   
   Description: Generates a new directive, using the supplied arguments.
@@ -25,6 +25,7 @@ import { mapSchema, MapperKind } from '@graphql-tools/utils';
 import type {
   DirectiveNode,
   GraphQLInputType,
+  GraphQLResolveInfo,
   GraphQLSchema,
   InputValueDefinitionNode,
 } from 'graphql';
@@ -48,7 +49,12 @@ interface NewDirectiveArgs {
     };
   }[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  resolveFn: (result: any, otherArgs: { [key: string]: string }) => any;
+  resolveFn: (
+    result: any,
+    otherArgs: { [key: string]: string },
+    context: any,
+    info: GraphQLResolveInfo
+  ) => any;
 }
 
 /**
@@ -104,7 +110,7 @@ function generateNewDirective(
       // };
       uField.resolve = async (source, { ...otherArgs }, context, info) => {
         const result = await resolve(source, otherArgs, context, info);
-        const returnValue = resolveFn(result, otherArgs);
+        const returnValue = resolveFn(result, otherArgs, context, info);
 
         return returnValue;
       };

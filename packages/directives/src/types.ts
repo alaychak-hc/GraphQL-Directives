@@ -5,7 +5,7 @@
   Email: ALaychak@harriscomputer.com
   
   Created At: 09-30-2022 04:03:23 PM
-  Last Modified: 10-04-2022 04:01:43 PM
+  Last Modified: 10-04-2022 04:18:59 PM
   Last Updated By: Andrew Laychak
   
   Description: TypeScript types for the API
@@ -17,9 +17,7 @@
 // #endregion
 
 // #region Imports
-import generateNewDirective, {
-  NewDirectiveArgs,
-} from './directives/Generate Directive.js';
+import generateNewDirective from './directives/Generate Directive.js';
 // #endregion
 
 // #region Exports
