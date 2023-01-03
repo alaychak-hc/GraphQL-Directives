@@ -9,7 +9,7 @@
     Email: Xlantra1@gmail.com
 
     Created At: 02-08-2021 12:41:49 PM
-    Last Modified: 09-30-2022 04:08:56 PM
+    Last Modified: 01-03-2023 03:58:32 PM
     Last Updated By: Andrew Laychak
 
     Description: Directive that handles transforming strings to specified formats (e.g. lowercase)
@@ -41,7 +41,7 @@ const TransformDirective = (schema: GraphQLSchema) =>
       {
         transform: {
           description: 'Formats the currency to the specified format',
-          type: GraphQLList(GraphQLString),
+          type: new GraphQLList(GraphQLString),
           defaultValue: [],
         },
       },
